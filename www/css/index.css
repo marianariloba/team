@@ -97,35 +97,6 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
-/* A bit of demo styles */
-.demo-swiper .swiper-slide {
-  font-size: 25px;
-  font-weight: 300;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  color: #000;
-}
-.demo-swiper .swiper-slide {
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  background: #fff;
-}
-.demo-swiper {
-  margin: 0px 0 35px;
-  font-size: 18px;
-  height: 120px;
-}
-.demo-swiper.demo-swiper-auto .swiper-slide {
-  width: 85%;
-}
-.demo-swiper.demo-swiper-auto .swiper-slide:nth-child(2n) {
-  width: 70%;
-}
-.demo-swiper.demo-swiper-auto .swiper-slide:nth-child(3n) {
-  width: 30%;
-}
 
 
 
@@ -159,6 +130,14 @@ h1 {
   .demo-swiper.demo-swiper-auto .swiper-slide:nth-child(3n) {
     width: 30%;
   }
+  .swiper-slide{
+    height: 80%;
+    width: 80%;
+    align-content: center;
+    justify-content: center;
+    
+
+  }
 
 
 
@@ -178,5 +157,21 @@ h1 {
 
 .bgbusqueda{
   background: url('../img/city.jpg');
+    background-size: contain;
 }
- 
+
+
+.bgopcion{
+  background-color: white;
+}
+
+
+
+.center-image{
+  position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

@@ -132,6 +132,15 @@ var app7 = new Framework7({
       {
         path: '/inmueble/',
         url: 'views/inmueble.html',
+      },{
+        path: '/novedades/',
+        url: 'views/novedades.html',
+      },{
+        path: '/favoritos/',
+        url: 'views/favoritos.html',
+      },{
+        path: '/masinfo/',
+        url: 'views/masinfo.html',
       },
       
 
@@ -322,6 +331,8 @@ var notificationFull = app7.notification.create({
 
     getInmuebles();
 
+    myPhotoBrowserStandalone.open();
+
   });
 
 
@@ -397,7 +408,7 @@ var notificationFull = app7.notification.create({
 
         for(x in objson.data){
 
-          var slide = '<div class="swiper-slide"><img src="'+objson.data[x].imagen+'"/></div>';
+          var slide = '<div class="swiper-slide"><img src="'+objson.data[x].imagen+'"width="100%"/></div>';
 
           swiper.appendSlide(slide);
 
@@ -415,6 +426,21 @@ var notificationFull = app7.notification.create({
       });
 
   }
+
+
+
+
+
+  function Favorito(id){
+    alert(id);
+
+
+  }
+
+
+
+
+
 
 
 
@@ -445,7 +471,7 @@ var notificationFull = app7.notification.create({
           console.log(objson.data[x].titulo);
 
 
-          inmueble = '<div class="card demo-card-header-pic"><div style="background-image:url('+objson.data[x].imagen1+')" class="card-header align-items-flex-end">'+objson.data[x].titulo+'</div><div class="card-content card-content-padding"><p class="date">Posted on January 21, 2015</p><p>'+objson.data[x].descripcion+'</p></div><div class="card-footer"><a href="#" class="link">'+objson.data[x].precio+'</a><a href="javascript:verinmueble('+objson.data[x].id+')" class="link">Ver más</a></div></div>';
+          inmueble = '<div class="card demo-card-header-pic"><div style="background-image:url('+objson.data[x].imagen1+')" class="card-header align-items-flex-end">'+objson.data[x].titulo+'</div><div class="card-content card-content-padding"><p class="date">'+objson.data[x].generales+'</p><p>'+objson.data[x].ubicaciontxt+'</p></div><div class="card-footer"><p>'+objson.data[x].precio+'</p></a><i class="f7-icons" onClick="Favorito('+objson.data[x].id+')">heart</i><a href="javascript:verinmueble('+objson.data[x].id+')" class="link">Ver más</a></div></div>';
 
           $$('#inmuebles').append(inmueble);
 
@@ -480,3 +506,135 @@ var notificationFull = app7.notification.create({
 
 
   }
+
+
+
+
+
+
+  function Vender(){
+
+    var nombre = $$('#nombre').val();
+    var apellidos = $$('#apellidos').val();
+    var telefono = $$('#telefono').val();
+    var correo = $$('#correo').val();
+    var descripcion = $$('#descripcion').val();
+    var ubicacion = $$('#ubicacion').val();
+    var precio = $$('#precio').val();
+    var superficie = $$('#superficie').val();
+
+
+
+    
+
+  
+      app7.preloader.show('blue');
+  
+      app7.request({
+        url: 'http://localhost/team/api/vender.php',
+        data:{nombre:nombre,apellidos:apellidos,telefono:telefono,correo:correo,descripcion:descripcion,ubicacion:ubicacion,precio:precio,superficie:superficie},
+        method:'POST',
+        crossDomain: true,
+        success:function(data){
+         
+          app7.preloader.hide();
+  
+          var objson = JSON.parse(data);
+  
+          if(objson.status_message == "CORRECTO"){
+  
+         alert("Tu propiedad ha sido registrada, te contactaremos lo más pronto posible. Gracias");
+           mainView.router.navigate('/home/',{animate:true});
+
+
+
+          }else{
+  
+            alert("Error. Inténtalo nuevamente.");
+          }
+        },
+        error:function(error){
+  
+        app7.preloader.hide();
+        
+        }
+  
+        
+        
+        });
+  
+  
+  }
+
+
+
+
+
+
+
+  function MasInfo(){
+
+    var nombre = $$('#nombremi').val();
+    var apellidos = $$('#apellidosmi').val();
+    var telefono = $$('#telefonomi').val();
+    var correo = $$('#correomi').val();
+       
+
+  
+      app7.preloader.show('blue');
+  
+      app7.request({
+        url: 'http://localhost/team/api/masinfo.php',
+        data:{nombre:nombre,apellidos:apellidos,telefono:telefono,correo:correo},
+        method:'POST',
+        crossDomain: true,
+        success:function(data){
+         
+          app7.preloader.hide();
+  
+          var objson = JSON.parse(data);
+  
+          if(objson.status_message == "CORRECTO"){
+  
+           mainView.router.navigate('/home/',{animate:true});
+
+
+
+          }else{
+  
+            alert("Error. Inténtalo nuevamente.");
+          }
+        },
+        error:function(error){
+  
+        app7.preloader.hide();
+        
+        }
+  
+        
+        
+        });
+  
+  
+  }
+
+
+
+
+
+ 
+
+  
+
+/*=== Default standalone ===*/
+var myPhotoBrowserStandalone = app7.photoBrowser.create({
+  photos : [
+      'https://cdn.framework7.io/placeholder/sports-1024x1024-1.jpg',
+      'https://cdn.framework7.io/placeholder/sports-1024x1024-2.jpg',
+      'https://cdn.framework7.io/placeholder/sports-1024x1024-3.jpg',
+  ]
+});
+//Open photo browser on click
+$$('.pb-standalone').on('click', function () {
+  myPhotoBrowserStandalone.open();
+});  
