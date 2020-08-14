@@ -331,7 +331,6 @@ var notificationFull = app7.notification.create({
 
     getInmuebles();
 
-    myPhotoBrowserStandalone.open();
 
   });
 
@@ -626,15 +625,3 @@ var notificationFull = app7.notification.create({
 
   
 
-/*=== Default standalone ===*/
-var myPhotoBrowserStandalone = app7.photoBrowser.create({
-  photos : [
-      'https://cdn.framework7.io/placeholder/sports-1024x1024-1.jpg',
-      'https://cdn.framework7.io/placeholder/sports-1024x1024-2.jpg',
-      'https://cdn.framework7.io/placeholder/sports-1024x1024-3.jpg',
-  ]
-});
-//Open photo browser on click
-$$('.pb-standalone').on('click', function () {
-  myPhotoBrowserStandalone.open();
-});  
